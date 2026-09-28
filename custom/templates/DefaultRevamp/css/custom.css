@@ -1900,6 +1900,33 @@ body.dark .ui.dropdown .menu > .item:hover,
     color: var(--fn-muted) !important;
 }
 
+.fn-mobile-nav.ui.sidebar .item:not(.fn-mobile-brand) img,
+.fn-mobile-nav.ui.sidebar .fn-mobile-account-group > .header img,
+.fn-mobile-nav.ui.sidebar .fn-mobile-account-link img {
+    display: inline-block !important;
+    width: 44px !important;
+    max-width: 44px !important;
+    height: 44px !important;
+    max-height: 44px !important;
+    min-width: 44px;
+    object-fit: cover !important;
+    margin: 0 10px 0 0 !important;
+    border-radius: var(--fn-radius-sm) !important;
+    vertical-align: middle !important;
+}
+
+.fn-mobile-account-group > .header {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    color: var(--fn-text) !important;
+    line-height: 1.2;
+}
+
+.fn-mobile-account-group > .menu {
+    margin-top: 10px !important;
+}
+
 .fn-mobile-account-heading {
     margin-top: 10px !important;
     padding-top: 16px !important;
