@@ -6,14 +6,14 @@
 </div>
 </div>
 
-<div class="ui inverted vertical footer segment" id="footer">
+<div class="ui inverted vertical footer segment fn-footer" id="footer">
     <div class="ui container">
         <div class="ui stackable inverted divided equal height stackable grid">
             <div class="{if $SOCIAL_MEDIA_ICONS|count > 0}six{else}eight{/if} wide column">
                 <h4 class="ui inverted header">{$SITE_NAME}</h4>
                 <div class="ui inverted link list">
                     <span class="item">&copy; {$SITE_NAME} {'Y'|date}</span>
-                    <span class="item">Powered By <a href="https://namelessmc.com">NamelessMC</a></span>
+                    <span class="item">Theme by <a href="https://x.com/john_fries_" target="_blank" rel="noopener">FriesNet</a></span>
                     {if $PAGE_LOAD_TIME}
                     <span class="item" id="page_load"></span>
                     {/if}

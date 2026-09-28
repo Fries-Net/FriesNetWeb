@@ -1,13 +1,11 @@
 <?php
 
 /*
- *  Made by Samerton | Revamped by Xemah
- *    https://github.com/NamelessMC/Nameless/
- *    NamelessMC version 2.2.0
+ *  FriesNet theme
  *
  *    Licence: MIT
  *
- *    DefaultRevamp Template
+ *    FriesNet Template
  */
 
 class DefaultRevamp_Template extends SmartyTemplateBase
@@ -29,7 +27,7 @@ class DefaultRevamp_Template extends SmartyTemplateBase
             'name' => 'DefaultRevamp',
             'version' => '2.2.5',
             'nl_version' => '2.2.5',
-            'author' => '<a href="https://xemah.com/" target="_blank">Xemah</a>',
+            'author' => '<a href="https://x.com/john_fries_" target="_blank">FriesNet</a>',
         ];
 
         $template['path'] = (defined('CONFIG_PATH') ? CONFIG_PATH : '') . '/custom/templates/' . $template['name'] . '/';
@@ -87,7 +85,7 @@ class DefaultRevamp_Template extends SmartyTemplateBase
         define('PAGE_LOAD_TIME', $this->_language->get('general', 'page_loaded_in', ['time' => round($page_load, 3)]));
 
         $this->addCSSFiles([
-            $this->_template['path'] . 'css/custom.css?v=220' => [],
+            $this->_template['path'] . 'css/custom.css?v=friesnet-1' => [],
         ]);
 
         $route = (isset($_GET['route']) ? rtrim($_GET['route'], '/') : '/');

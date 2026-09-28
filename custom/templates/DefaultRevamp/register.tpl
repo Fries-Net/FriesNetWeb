@@ -1,14 +1,18 @@
 {include file='header.tpl'}
 {include file='navbar.tpl'}
 
-<h2 class="ui header">
-    {$CREATE_AN_ACCOUNT}
+<div class="fn-auth-page">
+<div class="fn-section-heading">
+    <span class="fn-eyebrow">Join FriesNet</span>
+    <h2>{$CREATE_AN_ACCOUNT}</h2>
     {if $OAUTH_FLOW}
-    <div class="sub header">
+    <p>
         {$OAUTH_MESSAGE_CONTINUE}
-    </div>
+    </p>
+    {else}
+    <p>Create your community profile and keep your account details connected.</p>
     {/if}
-</h2>
+</div>
 
 {if isset($REGISTRATION_ERROR)}
 <div class="ui error icon message">
@@ -24,7 +28,7 @@
 </div>
 {/if}
 
-<div class="ui padded segment" id="register">
+<div class="ui padded segment fn-auth-card" id="register">
     <div class="ui stackable grid">
         <div class="ui centered row">
             <div class="ui sixteen wide tablet ten wide computer column">
@@ -132,6 +136,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
 {if $OAUTH_FLOW && $OAUTH_EMAIL_VERIFIED}

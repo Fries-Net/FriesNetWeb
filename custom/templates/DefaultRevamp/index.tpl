@@ -21,6 +21,12 @@
 </div>
 {/if}
 
+<div class="fn-section-heading fn-home-heading">
+    <span class="fn-eyebrow">FriesNet Feed</span>
+    <h2>{if $HOME_TYPE === 'news'}Latest community updates{else}{$SITE_NAME}{/if}</h2>
+    <p>{if $HOME_TYPE === 'news'}News, announcements, and conversations from the community.{else}Community information and updates from {$SITE_NAME}.{/if}</p>
+</div>
+
 <div class="ui stackable grid">
     <div class="ui centered row">
         {if count($WIDGETS_LEFT)}
