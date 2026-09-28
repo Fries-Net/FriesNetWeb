@@ -75,7 +75,7 @@ foreach ($leaderboard_placeholders as $leaderboard_placeholder) {
         $row_data->last_updated_full = date(DATE_FORMAT, $row->last_updated);
         $row_data->style = $leaderboard_users[$uuid]->getUser()->getGroupStyle();
         $row_data->profile = $leaderboard_users[$uuid]->getUser()->getProfileURL();
-        $row_data->groups = $leaderboard_users[$uuid]->getUser()->getAllGroupHtml();
+        $row_data->groups = $leaderboard_users[$uuid]->getUser()->getMainGroupHtml();
         $row_data->groupIds = $leaderboard_users[$uuid]->getUser()->getAllGroupIds();
 
         $leaderboard_placeholders_data[] = $row_data;

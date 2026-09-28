@@ -450,7 +450,7 @@ if (!isset($_GET['action'])) {
                 'author_profile' => $target_user->getProfileURL(),
                 'author_avatar' => $target_user->getAvatar(100),
                 'author_style' => $target_user->getGroupStyle(),
-                'author_groups' => $target_user->getAllGroupHtml(),
+                'author_groups' => $target_user->getMainGroupHtml(),
                 'message_date' => $timeago->inWords($nValue->created, $language),
                 'message_date_full' => date(DATE_FORMAT, $nValue->created),
                 'content' => EventHandler::executeEvent('renderPrivateMessage', ['content' => $nValue->content])['content'],

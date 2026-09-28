@@ -601,7 +601,7 @@ if (count($profile) >= 3 && ($profile[count($profile) - 1] != 'profile' || $prof
     $template->getEngine()->addVariables([
         'NICKNAME' => $profile_user->getDisplayname(true),
         'USERNAME' => $profile_user->getDisplayname(),
-        'GROUPS' => $profile_user->getAllGroupHtml(),
+        'GROUPS' => $profile_user->getMainGroupHtml(),
         'USERNAME_COLOUR' => $profile_user->getGroupStyle(),
         'USER_TITLE' => Output::getClean($query->user_title),
         'FOLLOW' => $language->get('user', 'follow'),

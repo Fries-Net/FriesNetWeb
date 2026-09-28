@@ -471,6 +471,22 @@ class User
     }
 
     /**
+     * Get this user's top group HTML display code.
+     *
+     * @return array Array containing only the user's main group HTML.
+     */
+    public function getMainGroupHtml(): array
+    {
+        if (!$this->exists()) {
+            return [];
+        }
+
+        $group_html = $this->getMainGroup()->group_html;
+
+        return $group_html !== '' ? [$group_html] : [];
+    }
+
+    /**
      * Get this user's signature.
      *
      * @return string Their signature.

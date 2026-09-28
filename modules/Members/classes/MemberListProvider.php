@@ -131,7 +131,7 @@ abstract class MemberListProvider {
                 $overview
                     ? []
                     : [
-                        'group_html' => $member->getAllGroupHtml(),
+                        'group_html' => $member->getMainGroupHtml(),
                         'metadata' => MemberListManager::getInstance()->getMemberMetadata($member),
                     ],
             );

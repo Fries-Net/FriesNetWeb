@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 'avatar' => $reaction_user->getAvatar(),
                 'profile' => $reaction_user->getProfileURL(),
                 'group_style' => $reaction_user->getGroupStyle(),
-                'group_html' => $reaction_user->getAllGroupHtml(),
+                'group_html' => $reaction_user->getMainGroupHtml(),
                 'reacted_time' => date(DATE_FORMAT, $reaction->time),
                 'reaction_html' => $all_reactions[$reaction->reaction_id]->html,
             ];
@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                     'avatar' => $reaction_user->getAvatar(),
                     'profile' => $reaction_user->getProfileURL(),
                     'group_style' => $reaction_user->getGroupStyle(),
-                    'group_html' => $reaction_user->getAllGroupHtml(),
+                    'group_html' => $reaction_user->getMainGroupHtml(),
                     'reacted_time' => date(DATE_FORMAT, $reaction->time),
                     'reaction_html' => $all_reactions[$reaction->reaction_id]->html,
                 ],

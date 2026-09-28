@@ -580,7 +580,7 @@ foreach ($results->data as $n => $nValue) {
     }
 
     // Get user's group HTML formatting and their signature
-    $user_groups_html = $post_creator->getAllGroupHtml();
+    $user_groups_html = $post_creator->getMainGroupHtml();
     $signature = $post_creator->getSignature();
 
     // Panel heading content

@@ -52,7 +52,7 @@ if (!is_numeric($_GET['id'])) {
         $profile = $target_user->getProfileURL();
         $avatar = $target_user->getAvatar();
         $style = $target_user->getGroupStyle();
-        $groups = $target_user->getAllGroupHtml();
+        $groups = $target_user->getMainGroupHtml();
         $id = Output::getClean($target_user->data()->id);
 
         $cache->store($_GET['id'], [$username, $nickname, $profile, $avatar, $style, $groups, $id], 60);
