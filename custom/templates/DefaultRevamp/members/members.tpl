@@ -1,11 +1,10 @@
 {include file='header.tpl'}
 {include file='navbar.tpl'}
 
-<h2 class="ui header">
-    {$MEMBERS}
-</h2>
-
-<br />
+<div class="fn-section-heading fn-members-heading">
+    <span class="fn-eyebrow">Community Directory</span>
+    <h2>{$MEMBERS}</h2>
+</div>
 
 {if isset($ERROR)}
 <div class="ui error icon message">
@@ -17,7 +16,7 @@
 </div>
 {/if}
 
-<div class="ui stackable equal width grid">
+<div class="ui stackable equal width grid fn-members-layout">
     <div class="ui centered row">
         <div class="ui four wide column">
             <div class="ui fluid vertical menu pointing">

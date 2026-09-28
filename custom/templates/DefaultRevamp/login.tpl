@@ -1,9 +1,12 @@
 {include file='header.tpl'}
 {include file='navbar.tpl'}
 
-<h2 class="ui header">
-    {$SIGN_IN}
-</h2>
+<div class="fn-auth-page">
+    <div class="fn-section-heading">
+        <span class="fn-eyebrow">Account Access</span>
+        <h2>{$SIGN_IN}</h2>
+        <p>Sign in to manage your profile, messages, alerts, and community settings.</p>
+    </div>
 
 {if count($ERROR)}
 <div class="ui error icon message">
@@ -19,7 +22,7 @@
 </div>
 {/if}
 
-<div class="ui padded segment" id="login">
+<div class="ui padded segment fn-auth-card" id="login">
     <div class="ui stackable grid">
         <div class="ui centered row">
             <div class="ui sixteen wide tablet ten wide computer column">
@@ -80,6 +83,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
 {include file='footer.tpl'}

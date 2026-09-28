@@ -1,6 +1,12 @@
-<div class="ui vertical inverted sidebar menu left" id="toc">
-    <div class="item">
-        <h3>{$SITE_NAME}</h3>
+<div class="ui vertical inverted sidebar menu left fn-mobile-nav" id="toc">
+    <div class="item fn-mobile-brand">
+        {if isset($LOGO_IMAGE)}
+            <img src="{$LOGO_IMAGE}" alt="{$SITE_NAME}">
+        {/if}
+        <div>
+            <h3>{$SITE_NAME}</h3>
+            <span>FriesNet</span>
+        </div>
     </div>
     {foreach from=$NAV_LINKS key=name item=item}
         {if isset($item.items)}
@@ -22,8 +28,17 @@
 
 <div class="pusher">
     <div id="wrapper">
-        <div class="ui secondary {$DEFAULT_REVAMP_NAVBAR_EXTRA_CLASSES} small menu" id="navbar">
+        <div class="ui secondary {$DEFAULT_REVAMP_NAVBAR_EXTRA_CLASSES} small menu fn-navbar" id="navbar">
             <div class="ui container">
+                <a class="item fn-brand" href="{$SITE_HOME}">
+                    {if isset($LOGO_IMAGE)}
+                        <img src="{$LOGO_IMAGE}" alt="{$SITE_NAME}">
+                    {/if}
+                    <span>
+                        <strong>{$SITE_NAME}</strong>
+                        <small>FriesNet</small>
+                    </span>
+                </a>
                 {foreach from=$NAV_LINKS key=name item=item}
                     {if isset($item.items)}
                         <div class="ui dropdown item">
@@ -48,7 +63,7 @@
                         </a>
                     {/if}
                 {/foreach}
-                <a class="toc item">
+                <a class="toc item fn-menu-toggle" aria-label="Open menu">
                     <i class="sidebar icon"></i>
                 </a>
                 <div class="right menu">
@@ -56,7 +71,7 @@
                     {if isset($item.items)}
                     {if ($name == "account")}
                     <a class="ui medium image label" data-toggle="popup" data-position="bottom right"
-                        id="button-{$name}">{$item.icon} {$item.title}</a>
+                        id="button-{$name}">{$item.icon} <span>{$item.title}</span></a>
                     {else}
                     <a class="ui small default icon button" data-toggle="popup" data-position="bottom right"
                         id="button-{$name}">{$item.icon}</a>
@@ -91,7 +106,7 @@
                     {if ($name == "panel")}
                     <a class="ui small primary icon button" href="{$item.link}" target="{$item.target}">{$item.icon}</a>
                     {elseif ($name == "register")}
-                    <a class="ui small primary button" href="{$item.link}" target="{$item.target}">{$item.title}</a>
+                    <a class="ui small primary button fn-register-action" href="{$item.link}" target="{$item.target}">{$item.title}</a>
                     {else}
                     <a class="ui small default button" href="{$item.link}" target="{$item.target}">{$item.title}</a>
                     {/if}
@@ -101,14 +116,16 @@
             </div>
         </div>
 
-        <div class="ui masthead" {if isset($BANNER_IMAGE)} style="background-image:url('{$BANNER_IMAGE}')" {/if}>
+        <div class="ui masthead fn-masthead" {if isset($BANNER_IMAGE)} style="background-image:url('{$BANNER_IMAGE}')" {/if}>
             <div class="ui container">
                 <div class="ui stackable grid">
                     <div class="ui middle aligned row">
-                        <div class="eight wide column">
+                        <div class="eight wide column fn-hero-copy">
+                            <span class="fn-eyebrow">FriesNet Community</span>
                             <h1>{$SITE_NAME}</h1>
+                            <p>Servers, forums, members, and updates in one clean community hub.</p>
                         </div>
-                        <div class="eight wide column">
+                        <div class="eight wide column fn-hero-side">
                             {if isset($MINECRAFT) && isset($SERVER_QUERY)}
                             <div class="connect-server">
                                 {if isset($SERVER_QUERY.status_value) && ($SERVER_QUERY.status_value == 1)}
@@ -128,13 +145,18 @@
                                 </h4>
                                 {/if}
                             </div>
+                            {else}
+                            <div class="connect-server fn-community-card">
+                                <h4 class="ui header">Welcome back</h4>
+                                <span>Jump into the latest community activity.</span>
+                            </div>
                             {/if}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="ui container">
+        <div class="ui container fn-main-container">
             <div class="ui negative icon message" id="ie-message">
                 <i class="exclamation triangle icon"></i>
                 <div class="content">
