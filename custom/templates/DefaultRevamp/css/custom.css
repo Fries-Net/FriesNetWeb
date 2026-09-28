@@ -2645,8 +2645,34 @@ body.dark .fn-members-layout .ui.vertical.menu .item:hover {
 }
 
 #profile-header .actions {
+    position: absolute;
     top: 16px;
     right: 16px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+#profile-header .actions form {
+    display: inline-flex !important;
+    margin: 0 !important;
+}
+
+#profile-header .actions .ui.icon.button {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+#profile-header .actions .ui.icon.button > .icon {
+    margin: 0 !important;
 }
 
 #profile .ui.tabular.menu,
