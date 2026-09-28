@@ -108,7 +108,7 @@
                                             {foreach from=$BADGES_LIST item=badge}
                                                 <tr>
                                                     <td>
-                                                        <span class="badge-preview" style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;margin-right:.5rem;border-radius:6px;background:{$badge->colour};color:#111;">
+                                                        <span class="badge-preview" style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;margin-right:.5rem;border-radius:6px;background:{$badge->colour};color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.55);">
                                                             {if $badge->image}
                                                                 <img src="{$CONFIG_PATH}{$badge->image}" alt="{$badge->name}" style="width:24px;height:24px;object-fit:contain;">
                                                             {else}

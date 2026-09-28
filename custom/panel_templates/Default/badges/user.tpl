@@ -70,7 +70,7 @@
                                                 <input type="hidden" name="action" value="assign">
                                                 <input type="hidden" name="badge_id" value="{$badge->id}">
                                                 <div class="d-flex align-items-center mb-2">
-                                                    <span style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;margin-right:.75rem;border-radius:6px;background:{$badge->colour};color:#111;">
+                                                    <span style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;margin-right:.75rem;border-radius:6px;background:{$badge->colour};color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.55);">
                                                         {if $badge->image}
                                                             <img src="{$CONFIG_PATH}{$badge->image}" alt="{$badge->name}" style="width:28px;height:28px;object-fit:contain;">
                                                         {else}
