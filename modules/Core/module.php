@@ -56,6 +56,7 @@ class Core_Module extends Module {
         $pages->add('Core', '/forgot_password', 'pages/forgot_password.php');
         $pages->add('Core', '/complete_signup', 'pages/complete_signup.php');
         $pages->add('Core', '/status', 'pages/status.php', 'status');
+        $pages->add('Core', '/staff', 'pages/staff.php', 'staff');
         if (Settings::get('mc_integration')) {
             $pages->add('Core', '/leaderboards', 'pages/leaderboards.php', 'leaderboards');
         }

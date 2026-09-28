@@ -31,13 +31,17 @@ value="{$PAGE_KEYWORDS}"}{else}{assign var="PAGEKEYWORDS" value=" "}{/if}
         <meta property="og:title" content="{$TITLE} &bull; {$smarty.const.SITE_NAME}" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="{$OG_URL}" />
-        <meta property="og:image" content="{$OG_IMAGE}" />
-        <meta property='og:description' content="{$PAGE_DESCRIPTION}" />
+        {if isset($OG_IMAGE)}
+            <meta property="og:image" content="{$OG_IMAGE}" />
+        {/if}
+        <meta property='og:description' content="{$PAGEDESCRIPTION}" />
 
         <!-- Twitter Card Properties -->
         <meta name="twitter:title" content="{$TITLE} &bull; {$smarty.const.SITE_NAME}" />
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:image" content="{$OG_IMAGE}" />
+        {if isset($OG_IMAGE)}
+            <meta name="twitter:image" content="{$OG_IMAGE}" />
+        {/if}
 
         {if isset($PAGE_DESCRIPTION) && $PAGE_DESCRIPTION|count_characters > 0}
             <meta name="twitter:description" content="{$PAGE_DESCRIPTION}" />
