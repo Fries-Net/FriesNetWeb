@@ -40,9 +40,11 @@
                 <div class="sub header">{$USER_TITLE}</div>
             {/if}
         </h2>
-        <div class="fn-profile-groups">
-            {foreach from=$GROUPS item=group}
-                {$group}
+        <div class="fn-profile-groups fn-profile-main-rank">
+            {foreach from=$GROUPS item=group name=profile_groups}
+                {if $smarty.foreach.profile_groups.first}
+                    {$group}
+                {/if}
             {/foreach}
         </div>
         {if isset($PROFILE_BADGES) && count($PROFILE_BADGES)}

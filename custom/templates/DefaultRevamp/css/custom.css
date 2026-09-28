@@ -2212,8 +2212,7 @@ body.dark .ui.image.label {
     border-radius: var(--fn-radius-sm) !important;
 }
 
-.ui.label,
-.badge {
+.ui.label {
     background: var(--fn-surface-3) !important;
     color: var(--fn-soft) !important;
     border: 1px solid var(--fn-border) !important;
@@ -2544,7 +2543,65 @@ body.dark .fn-members-layout .ui.vertical.menu .item:hover {
 #profile-header .fn-profile-groups .badge {
     margin: 0 !important;
     font-size: 0.72rem;
-    opacity: 0.82;
+}
+
+#profile-header .fn-profile-main-rank .ui.label,
+#profile-header .fn-profile-main-rank .badge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    padding: 0.42em 0.68em;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+    color: inherit;
+    font-size: 0.74rem;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1;
+    opacity: 1;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+#profile-header .fn-profile-main-rank .badge-primary {
+    background-color: #007bff !important;
+    color: #fff !important;
+}
+
+#profile-header .fn-profile-main-rank .badge-secondary {
+    background-color: #6c757d !important;
+    color: #fff !important;
+}
+
+#profile-header .fn-profile-main-rank .badge-success {
+    background-color: #28a745 !important;
+    color: #fff !important;
+}
+
+#profile-header .fn-profile-main-rank .badge-info {
+    background-color: #17a2b8 !important;
+    color: #fff !important;
+}
+
+#profile-header .fn-profile-main-rank .badge-warning {
+    background-color: #ffc107 !important;
+    color: #1b1300 !important;
+    text-shadow: none;
+}
+
+#profile-header .fn-profile-main-rank .badge-danger {
+    background-color: #dc3545 !important;
+    color: #fff !important;
+}
+
+#profile-header .fn-profile-main-rank .badge-light {
+    background-color: #f8f9fa !important;
+    color: #151515 !important;
+    text-shadow: none;
+}
+
+#profile-header .fn-profile-main-rank .badge-dark {
+    background-color: #343a40 !important;
+    color: #fff !important;
 }
 
 .fn-profile-badges,
