@@ -378,6 +378,7 @@ if ($page != 'install') {
     }
 
     $navigation->add('index', $language->get('general', 'home'), URL::build('/'), 'top', null, $home_order, $home_icon);
+    $navigation->add('staff', 'Staff', URL::build('/staff'), 'top', null, $home_order + 1, '<i class="users icon"></i>');
 
     $endpoints = $container->get(Endpoints::class);
     $announcements = $container->get(Announcements::class);
@@ -385,9 +386,26 @@ if ($page != 'install') {
     // Modules
     $cache->setCache('modulescache');
     if (!$cache->isCached('enabled_modules')) {
-        $cache->store('enabled_modules', [
-            ['name' => 'Core', 'priority' => 1],
-        ]);
+        $enabled_modules = [];
+
+        if (DB::getInstance()->showTables('modules')) {
+            $enabled_module_rows = DB::getInstance()->query('SELECT name FROM nl2_modules WHERE enabled = 1 ORDER BY id ASC')->results();
+            foreach ($enabled_module_rows as $enabled_module) {
+                $enabled_modules[] = [
+                    'name' => $enabled_module->name,
+                    'priority' => $enabled_module->name === 'Core' ? 0 : count($enabled_modules) + 1,
+                ];
+            }
+        }
+
+        if (!in_array('Core', array_column($enabled_modules, 'name'), true)) {
+            array_unshift($enabled_modules, ['name' => 'Core', 'priority' => 0]);
+        }
+
+        $cache->store('enabled_modules', $enabled_modules);
+        $cache->store('module_core', true);
+    }
+    if (!$cache->isCached('module_core')) {
         $cache->store('module_core', true);
     }
     $enabled_modules = $cache->retrieve('enabled_modules');

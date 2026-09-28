@@ -3,11 +3,26 @@
         <img class="ui tiny circular image" src="{$AVATAR}" alt="{$USERNAME}" />
         <h4 class="ui header" style="{$STYLE}">{$NICKNAME}</h4>
         {if count($GROUPS)}
+            <div class="fn-popover-groups">
             {foreach from=$GROUPS item=group_html}
                 {$group_html}
             {/foreach}
+            </div>
         {else}
             <div class="ui label">{$GUEST}</div>
+        {/if}
+        {if isset($USER_POPUP_BADGES) && count($USER_POPUP_BADGES)}
+            <div class="fn-popover-badges">
+                {foreach from=$USER_POPUP_BADGES item=badge}
+                    <span class="fn-profile-badge fn-profile-badge-static" data-tooltip="{$badge.name}: {$badge.description}" style="--badge-colour: {$badge.colour};">
+                        {if $badge.image}
+                            <img src="{$badge.image}" alt="{$badge.name}">
+                        {else}
+                            <i class="{$badge.icon}"></i>
+                        {/if}
+                    </span>
+                {/foreach}
+            </div>
         {/if}
     </div>
     {if isset($REGISTERED)}

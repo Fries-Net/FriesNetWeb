@@ -48,6 +48,26 @@
                                     <p class="text-muted text-center">{foreach from=$USER_GROUPS item=item}{$item}
                                         {/foreach}</p>
 
+                                    {if isset($PANEL_USER_BADGES)}
+                                        <div class="text-center mb-3">
+                                            {foreach from=$PANEL_USER_BADGES item=badge}
+                                                <span class="badge badge-dark mb-1" title="{$badge->description}">
+                                                    {if $badge->image}
+                                                        <img src="{$CONFIG_PATH}{$badge->image}" alt="{$badge->name}" style="width:16px;height:16px;object-fit:contain;margin-right:.25rem;">
+                                                    {else}
+                                                        <i class="{if $badge->icon}{$badge->icon}{else}fas fa-award{/if}"></i>
+                                                    {/if}
+                                                    {$badge->name}
+                                                </span>
+                                            {foreachelse}
+                                                <small class="text-muted">{$PANEL_USER_BADGES_EMPTY}</small>
+                                            {/foreach}
+                                            <div class="mt-2">
+                                                <a class="btn btn-sm btn-primary" href="{$PANEL_USER_BADGES_LINK}">{$PANEL_USER_BADGES_MANAGE}</a>
+                                            </div>
+                                        </div>
+                                    {/if}
+
                                     <ul class="list-group list-group-unbordered mb-3">
                                         <li class="list-group-item">
                                             <b>{$REGISTERED}</b><br />{$REGISTERED_VALUE}

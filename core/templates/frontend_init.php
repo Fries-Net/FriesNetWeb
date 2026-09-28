@@ -72,10 +72,26 @@ if (file_exists(ROOT_PATH . '/custom/templates/' . TEMPLATE . '/template.php')) 
     require(ROOT_PATH . '/custom/templates/DefaultRevamp/template.php');
 }
 
+$site_url_base = rtrim(URL::getSelfURL(), '/');
+$absolute_asset_url = static function (string $path) use ($site_url_base): string {
+    $path = Output::getClean($path);
+
+    if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+        return $path;
+    }
+
+    return $site_url_base . (str_starts_with($path, '/') ? '' : '/') . $path;
+};
+
+$default_meta_description = trim(strip_tags(Settings::get('default_meta_description', '') ?? ''));
+if ($default_meta_description === '') {
+    $default_meta_description = 'FriesNet is the Minecraft community hub for JohnFries, with server news, forums, staff updates, and player profiles.';
+}
+
 // Basic template variables
 $template->getEngine()->addVariables([
     'CONFIG_PATH' => defined('CONFIG_PATH') ? CONFIG_PATH . '/' : '/',
-    'OG_URL' => Output::getClean(rtrim(URL::getSelfURL(), '/') . $_SERVER['REQUEST_URI']),
+    'OG_URL' => Output::getClean($site_url_base . $_SERVER['REQUEST_URI']),
     'SITE_NAME' => Output::getClean(SITE_NAME),
     'SITE_HOME' => URL::build('/'),
     'USER_INFO_URL' => URL::build('/queries/user/', 'id='),
@@ -85,7 +101,10 @@ $template->getEngine()->addVariables([
 $cache->setCache('backgroundcache');
 if ($cache->isCached('og_image')) {
     // Assign the image value now, some pages may override it (via Page Metadata config)
-    $template->getEngine()->addVariable('OG_IMAGE', rtrim(URL::getSelfURL(), '/') . $cache->retrieve('og_image'));
+    $og_image = $cache->retrieve('og_image');
+    if (!empty($og_image)) {
+        $template->getEngine()->addVariable('OG_IMAGE', $absolute_asset_url($og_image));
+    }
 }
 
 // User related actions
@@ -140,11 +159,16 @@ if (!defined('PAGE_DESCRIPTION')) {
 
         $og_image = $page_metadata->image;
         if ($og_image) {
-            $template->getEngine()->addVariable('OG_IMAGE', rtrim(URL::getSelfURL(), '/') . $og_image);
+            $template->getEngine()->addVariable('OG_IMAGE', $absolute_asset_url($og_image));
         }
     } else {
+        $page_description = trim(strip_tags(Settings::get('default_meta_description', '') ?? ''));
+        if ($page_description === '') {
+            $page_description = $default_meta_description;
+        }
+
         $template->getEngine()->addVariables([
-            'PAGE_DESCRIPTION' => str_replace('{site}', Output::getClean(SITE_NAME), addslashes(strip_tags(Settings::get('default_meta_description', '')))),
+            'PAGE_DESCRIPTION' => str_replace('{site}', Output::getClean(SITE_NAME), addslashes($page_description)),
             'PAGE_KEYWORDS' => addslashes(strip_tags(Settings::get('default_meta_keywords', ''))),
         ]);
     }
@@ -168,13 +192,29 @@ if (!empty($banner_image)) {
 $logo_image = $cache->retrieve('logo_image');
 
 if (!empty($logo_image)) {
-    $template->getEngine()->addVariable('LOGO_IMAGE', Output::getClean($logo_image));
+    $logo_image = Output::getClean($logo_image);
+    $absolute_logo_image = $absolute_asset_url($logo_image);
+
+    $template->getEngine()->addVariable('LOGO_IMAGE', $logo_image);
+
+    $template_variables = $template->getEngine()->getVariables();
+    if (!array_key_exists('OG_IMAGE', $template_variables)) {
+        $template->getEngine()->addVariable('OG_IMAGE', $absolute_logo_image);
+    }
 }
 
 $favicon_image = $cache->retrieve('favicon_image');
 
 if (!empty($favicon_image)) {
-    $template->getEngine()->addVariable('FAVICON', Output::getClean($favicon_image));
+    $favicon_image = Output::getClean($favicon_image);
+    $template->getEngine()->addVariable('FAVICON', $favicon_image);
+
+    $template_variables = $template->getEngine()->getVariables();
+    if (!array_key_exists('OG_IMAGE', $template_variables)) {
+        $template->getEngine()->addVariable('OG_IMAGE', $absolute_asset_url($favicon_image));
+    }
+} elseif (!empty($logo_image)) {
+    $template->getEngine()->addVariable('FAVICON', $logo_image);
 }
 
 $analytics_id = Settings::get('ga_script');

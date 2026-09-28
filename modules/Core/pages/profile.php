@@ -64,6 +64,11 @@ if (count($profile) >= 3 && ($profile[count($profile) - 1] != 'profile' || $prof
     }
     $query = $profile_user->data();
 
+    $template->getEngine()->addVariables([
+        'PAGE_DESCRIPTION' => $profile_user->getDisplayname(true) . ' on FriesNet.',
+        'OG_IMAGE' => Output::getClean($profile_user->getAvatar(256, true)),
+    ]);
+
     // Set Can view
     $canView = true;
 
@@ -858,6 +863,25 @@ if (count($profile) >= 3 && ($profile[count($profile) - 1] != 'profile' || $prof
 
     // Load modules + template
     Module::loadPage($user, $pages, $cache, $smarty, [$navigation, $cc_nav, $staffcp_nav], $widgets, $template);
+
+    $template_variables = $template->getEngine()->getVariables();
+    if (!array_key_exists('PROFILE_BADGES', $template_variables)) {
+        $badges_manager = ROOT_PATH . '/modules/Badges/classes/BadgesManager.php';
+        if (is_file($badges_manager)) {
+            require_once $badges_manager;
+
+            if (class_exists('BadgesManager')) {
+                $template->getEngine()->addVariable('PROFILE_BADGES', BadgesManager::getUserBadges((int) $profile_user->data()->id));
+
+                if ($user->isLoggedIn() && $user->hasPermission('admincp.badges.assign')) {
+                    $template->getEngine()->addVariable(
+                        'BADGE_EDIT_LINK',
+                        URL::build('/panel/badges/user', 'id=' . urlencode($profile_user->data()->id))
+                    );
+                }
+            }
+        }
+    }
 
     $template->onPageLoad();
 

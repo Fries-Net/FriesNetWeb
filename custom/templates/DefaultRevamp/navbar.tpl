@@ -24,6 +24,42 @@
             </a>
         {/if}
     {/foreach}
+    {if isset($USER_SECTION) && count($USER_SECTION)}
+        <div class="item fn-mobile-account-heading">
+            <div class="header">Account</div>
+        </div>
+        {foreach from=$USER_SECTION key=name item=item}
+            {if isset($item.items)}
+                <div class="item fn-mobile-account-group">
+                    <div class="header">{$item.icon} {$item.title}</div>
+                    <div class="menu">
+                        {foreach from=$item.items item=dropdown}
+                            {if !isset($dropdown.separator)}
+                                {if isset($dropdown.action)}
+                                    <a class="item" href="#" data-link="{$dropdown.link}" data-action="{$dropdown.action}">
+                                        {$dropdown.icon} {$dropdown.title}
+                                    </a>
+                                {else}
+                                    <a class="item" href="{$dropdown.link}" target="{$dropdown.target}">
+                                        {$dropdown.icon} {$dropdown.title}
+                                    </a>
+                                {/if}
+                            {/if}
+                        {/foreach}
+                    </div>
+                    {if !empty($item.meta)}
+                        <div class="menu">
+                            <a class="item" href="{$item.link}">{$item.meta}</a>
+                        </div>
+                    {/if}
+                </div>
+            {else}
+                <a class="item fn-mobile-account-link{if $name eq 'register'} fn-mobile-register{/if}" href="{$item.link}" target="{$item.target}">
+                    {$item.icon} {$item.title}
+                </a>
+            {/if}
+        {/foreach}
+    {/if}
 </div>
 
 <div class="pusher">
