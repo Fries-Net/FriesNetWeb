@@ -1749,7 +1749,9 @@ body.dark .fn-navbar.ui.secondary.menu:not(.inverted) {
 .fn-navbar .ui.container {
     display: flex;
     align-items: center;
+    min-height: inherit;
     gap: 4px;
+    flex-wrap: nowrap;
 }
 
 .fn-navbar.ui.menu .item,
@@ -1763,6 +1765,7 @@ body.dark .fn-navbar.ui.menu .item {
 .fn-navbar.ui.secondary.menu .item {
     margin: 0 2px;
     padding: 11px 12px;
+    white-space: nowrap;
 }
 
 .fn-navbar.ui.menu .item:hover,
@@ -1774,6 +1777,7 @@ body.dark .fn-navbar.ui.menu .item.active {
 }
 
 .fn-brand.item {
+    flex: 0 0 auto;
     min-width: 188px;
     margin-right: 14px !important;
     padding-left: 0 !important;
@@ -1818,8 +1822,10 @@ body.dark .fn-navbar.ui.menu .item.active {
 }
 
 .fn-navbar .right.menu {
+    margin-left: auto !important;
     align-items: center;
     gap: 7px;
+    flex: 0 0 auto;
 }
 
 .fn-navbar .ui.button,
@@ -1877,6 +1883,43 @@ body.dark .ui.dropdown .menu > .item:hover,
 .fn-mobile-nav.ui.sidebar {
     background: #0b0d11 !important;
     border-right: 1px solid var(--fn-border);
+}
+
+.fn-mobile-nav.ui.sidebar .item {
+    color: var(--fn-soft) !important;
+    border-color: var(--fn-border) !important;
+}
+
+.fn-mobile-nav.ui.sidebar .item:hover,
+.fn-mobile-nav.ui.sidebar .item.active {
+    background: rgba(240, 90, 59, 0.12) !important;
+    color: var(--fn-text) !important;
+}
+
+.fn-mobile-nav.ui.sidebar .menu .item {
+    color: var(--fn-muted) !important;
+}
+
+.fn-mobile-account-heading {
+    margin-top: 10px !important;
+    padding-top: 16px !important;
+    border-top: 1px solid var(--fn-border) !important;
+}
+
+.fn-mobile-account-heading .header {
+    color: var(--fn-accent) !important;
+    font-size: 0.78rem;
+    letter-spacing: 0;
+    text-transform: uppercase;
+}
+
+.fn-mobile-account-link.fn-mobile-register {
+    margin: 10px 12px !important;
+    justify-content: center;
+    background: var(--fn-accent) !important;
+    color: var(--fn-accent-ink) !important;
+    border-radius: var(--fn-radius-sm) !important;
+    font-weight: 900 !important;
 }
 
 .fn-mobile-brand {
@@ -2315,10 +2358,24 @@ a.fn-route-card {
     max-width: 640px;
 }
 
+.fn-auth-card .ui.form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.fn-auth-card .ui.form .field {
+    margin: 0;
+}
+
 .fn-auth-card input[type="submit"],
 .fn-auth-card .ui.positive.button,
 .fn-auth-card .ui.negative.button {
     min-height: 44px;
+}
+
+.fn-auth-card input[type="submit"].ui.button {
+    min-width: 150px;
 }
 
 .fn-auth-card .ui.equal.width.grid .column {
@@ -2762,6 +2819,23 @@ body.dark .cc-window.cc-floating {
     }
 }
 
+@media only screen and (max-width: 1100px) {
+    .fn-navbar.ui.secondary.menu .menu,
+    .fn-navbar.ui.secondary.menu > .ui.container > .item:not(.fn-brand):not(.toc) {
+        display: none !important;
+    }
+
+    .fn-navbar.ui.secondary.menu .toc.item {
+        display: flex !important;
+    }
+
+    .fn-menu-toggle {
+        margin-left: auto !important;
+        background: var(--fn-surface-2) !important;
+        border: 1px solid var(--fn-border) !important;
+    }
+}
+
 @media only screen and (max-width: 768px) {
     .fn-navbar.ui.secondary.menu .menu,
     .fn-navbar.ui.secondary.menu > .ui.container > .item:not(.fn-brand):not(.toc) {
@@ -2803,6 +2877,34 @@ body.dark .cc-window.cc-floating {
 
     .fn-auth-card.ui.segment {
         padding: 18px !important;
+    }
+
+    .fn-auth-card .ui.form {
+        gap: 12px;
+    }
+
+    .fn-auth-card input[type="submit"],
+    .fn-auth-card .ui.positive.button,
+    .fn-auth-card .ui.negative.button,
+    .fn-auth-card .ui.button.right.floated {
+        width: 100%;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    .fn-auth-card .ui.equal.width.grid,
+    .fn-auth-card .ui.equal.width.two.column.grid {
+        display: block;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    .fn-auth-card .ui.equal.width.grid > .column,
+    .fn-auth-card .ui.equal.width.two.column.grid > .column {
+        width: 100% !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin-bottom: 10px;
     }
 
     #profile-header.ui.segment {
