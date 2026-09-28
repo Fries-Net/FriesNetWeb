@@ -25,6 +25,11 @@
                     </form>
                 {/if}
             {/if}
+            {if isset($BADGE_EDIT_LINK)}
+                <a class="ui tiny orange icon button" href="{$BADGE_EDIT_LINK}" data-toggle="tooltip" data-content="Manage badges">
+                    <i class="certificate icon"></i>
+                </a>
+            {/if}
         {/if}
     </div>
     <center>
@@ -35,11 +40,55 @@
                 <div class="sub header">{$USER_TITLE}</div>
             {/if}
         </h2>
-        {foreach from=$GROUPS item=group}
-            {$group}
-        {/foreach}
+        <div class="fn-profile-groups">
+            {foreach from=$GROUPS item=group}
+                {$group}
+            {/foreach}
+        </div>
+        {if isset($PROFILE_BADGES) && count($PROFILE_BADGES)}
+            <div class="fn-profile-badges" aria-label="Profile badges">
+                {foreach from=$PROFILE_BADGES item=badge}
+                    <button type="button" class="fn-profile-badge" data-toggle="modal" data-target="#modal-badge-{$badge.id}" data-tooltip="{$badge.name}" style="--badge-colour: {$badge.colour};">
+                        {if $badge.image}
+                            <img src="{$badge.image}" alt="{$badge.name}">
+                        {else}
+                            <i class="{$badge.icon}"></i>
+                        {/if}
+                    </button>
+                {/foreach}
+            </div>
+        {/if}
     </center>
 </div>
+
+{if isset($PROFILE_BADGES) && count($PROFILE_BADGES)}
+    {foreach from=$PROFILE_BADGES item=badge}
+        <div class="ui small modal fn-badge-modal" id="modal-badge-{$badge.id}">
+            <i class="close icon"></i>
+            <div class="header">
+                <span class="fn-profile-badge fn-profile-badge-static" style="--badge-colour: {$badge.colour};">
+                    {if $badge.image}
+                        <img src="{$badge.image}" alt="{$badge.name}">
+                    {else}
+                        <i class="{$badge.icon}"></i>
+                    {/if}
+                </span>
+                {$badge.name}
+            </div>
+            <div class="content">
+                {if $badge.description}
+                    <p>{$badge.description}</p>
+                {/if}
+                {if $badge.note}
+                    <p class="fn-badge-note">{$badge.note}</p>
+                {/if}
+                {if $badge.awarded_at}
+                    <p class="fn-badge-awarded">Awarded {$badge.awarded_at}</p>
+                {/if}
+            </div>
+        </div>
+    {/foreach}
+{/if}
 
 <div class="ui stackable grid" id="profile">
     <div class="ui centered row">

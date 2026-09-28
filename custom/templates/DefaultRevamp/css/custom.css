@@ -2432,6 +2432,103 @@ body.dark .fn-members-layout .ui.vertical.menu .item:hover {
     color: var(--fn-text) !important;
 }
 
+#profile-header .fn-profile-groups {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+#profile-header .fn-profile-groups .ui.label,
+#profile-header .fn-profile-groups .badge {
+    margin: 0 !important;
+    font-size: 0.72rem;
+    opacity: 0.82;
+}
+
+.fn-profile-badges,
+.fn-popover-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.fn-popover-groups {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+}
+
+.fn-popover-badges {
+    margin-top: 10px;
+}
+
+.fn-profile-badge {
+    --badge-colour: var(--fn-accent);
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    background: var(--fn-surface-3);
+    background:
+        radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.3), transparent 34%),
+        color-mix(in srgb, var(--badge-colour) 28%, #11151b);
+    border: 1px solid var(--fn-border-strong);
+    border: 1px solid color-mix(in srgb, var(--badge-colour) 72%, transparent);
+    border-radius: 8px;
+    color: var(--fn-text);
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.34);
+    cursor: pointer;
+    transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.fn-profile-badge:hover {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+.fn-profile-badge img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+}
+
+.fn-profile-badge i {
+    margin: 0 !important;
+    font-size: 1rem;
+}
+
+.fn-profile-badge-static {
+    cursor: default;
+}
+
+.fn-profile-badge-static:hover {
+    transform: none;
+}
+
+.fn-badge-modal .header {
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
+}
+
+.fn-badge-modal .content p {
+    color: var(--fn-soft);
+}
+
+.fn-badge-note,
+.fn-badge-awarded {
+    color: var(--fn-muted) !important;
+}
+
 #profile-header .actions {
     top: 16px;
     right: 16px;
