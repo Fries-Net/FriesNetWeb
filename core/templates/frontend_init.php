@@ -73,6 +73,16 @@ if (file_exists(ROOT_PATH . '/custom/templates/' . TEMPLATE . '/template.php')) 
 }
 
 $site_url_base = rtrim(URL::getSelfURL(), '/');
+$absolute_asset_url = static function (string $path) use ($site_url_base): string {
+    $path = Output::getClean($path);
+
+    if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+        return $path;
+    }
+
+    return $site_url_base . (str_starts_with($path, '/') ? '' : '/') . $path;
+};
+
 $default_meta_description = trim(strip_tags(Settings::get('default_meta_description', '') ?? ''));
 if ($default_meta_description === '') {
     $default_meta_description = 'FriesNet is the Minecraft community hub for JohnFries, with server news, forums, staff updates, and player profiles.';
@@ -93,12 +103,7 @@ if ($cache->isCached('og_image')) {
     // Assign the image value now, some pages may override it (via Page Metadata config)
     $og_image = $cache->retrieve('og_image');
     if (!empty($og_image)) {
-        $template->getEngine()->addVariable(
-            'OG_IMAGE',
-            str_starts_with($og_image, 'http')
-                ? Output::getClean($og_image)
-                : $site_url_base . (str_starts_with($og_image, '/') ? '' : '/') . Output::getClean($og_image)
-        );
+        $template->getEngine()->addVariable('OG_IMAGE', $absolute_asset_url($og_image));
     }
 }
 
@@ -154,7 +159,7 @@ if (!defined('PAGE_DESCRIPTION')) {
 
         $og_image = $page_metadata->image;
         if ($og_image) {
-            $template->getEngine()->addVariable('OG_IMAGE', rtrim(URL::getSelfURL(), '/') . $og_image);
+            $template->getEngine()->addVariable('OG_IMAGE', $absolute_asset_url($og_image));
         }
     } else {
         $page_description = trim(strip_tags(Settings::get('default_meta_description', '') ?? ''));
@@ -188,9 +193,7 @@ $logo_image = $cache->retrieve('logo_image');
 
 if (!empty($logo_image)) {
     $logo_image = Output::getClean($logo_image);
-    $absolute_logo_image = str_starts_with($logo_image, 'http')
-        ? $logo_image
-        : $site_url_base . (str_starts_with($logo_image, '/') ? '' : '/') . $logo_image;
+    $absolute_logo_image = $absolute_asset_url($logo_image);
 
     $template->getEngine()->addVariable('LOGO_IMAGE', $logo_image);
 
@@ -203,7 +206,13 @@ if (!empty($logo_image)) {
 $favicon_image = $cache->retrieve('favicon_image');
 
 if (!empty($favicon_image)) {
-    $template->getEngine()->addVariable('FAVICON', Output::getClean($favicon_image));
+    $favicon_image = Output::getClean($favicon_image);
+    $template->getEngine()->addVariable('FAVICON', $favicon_image);
+
+    $template_variables = $template->getEngine()->getVariables();
+    if (!array_key_exists('OG_IMAGE', $template_variables)) {
+        $template->getEngine()->addVariable('OG_IMAGE', $absolute_asset_url($favicon_image));
+    }
 } elseif (!empty($logo_image)) {
     $template->getEngine()->addVariable('FAVICON', $logo_image);
 }

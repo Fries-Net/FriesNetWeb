@@ -21,7 +21,9 @@ value="{$PAGE_KEYWORDS}"}{else}{assign var="PAGEKEYWORDS" value=" "}{/if}
         <title>{$TITLE} &bull; {$smarty.const.SITE_NAME}</title>
 
         {if isset($FAVICON)}
+        <link rel="icon" href="{$FAVICON}" type="image/x-icon" />
         <link rel="shortcut icon" href="{$FAVICON}" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="{$FAVICON}" />
         {/if}
 
         <meta name="author" content="{$smarty.const.SITE_NAME}">
@@ -29,6 +31,7 @@ value="{$PAGE_KEYWORDS}"}{else}{assign var="PAGEKEYWORDS" value=" "}{/if}
         <meta name='keywords' content='{$PAGEKEYWORDS}' />
 
         <meta property="og:title" content="{$TITLE} &bull; {$smarty.const.SITE_NAME}" />
+        <meta property="og:site_name" content="{$smarty.const.SITE_NAME}" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="{$OG_URL}" />
         {if isset($OG_IMAGE)}
